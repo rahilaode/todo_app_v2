@@ -1,0 +1,36 @@
+{%extends "base.html" %}
+
+{%block title%}
+    Home page
+{%endblock%}
+
+{%block content %}
+<nav>
+        <ul>
+            <li>
+                <a href="#">
+                    {{user}}
+                </a>
+            </li>
+            <li>
+                <form action="/admin/logout" method="POST">
+                    <input type="submit" value="logout">
+                </form>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="flex-wrapper">
+            <form action="{{url_for('admin.insert')}}" method="POST" class="flex-form">
+                <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+                <h1>Add Note</h1>
+                <label for="title">Title</label>
+                <input type="text" class="input-title" name="title">
+                <label for="content">Description</label>
+                <textarea name="content" class="input-content" cols="60"></textarea>
+            <input type="submit" value="Add Item" onclick="makeRequestWithJWT()" class="btn">
+          </form>
+        </div>
+    </div>
+{%endblock%}

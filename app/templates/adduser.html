@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{%block title%}
+    Login page
+{%endblock%}
+
+{%block content %}
+<form action="/signup" method="POST" class="container">
+<div class="flex-container">
+
+    <h1>Registration</h1>
+        <label for="username">Name</label>
+        <input type="text" class="input" name="name">
+        <label for="email">Email</label>
+        <input type="text" class="input" name="email">
+        <label for="password">Password</label>
+        <input type="password" class="input" name="password">
+        <label for="password">Confirm Password</label>
+        <input type="password" class="input" name="password2">
+        <button class="btn-action">Confirm</button>
+    </div>
+</form>
+{%endblock%}

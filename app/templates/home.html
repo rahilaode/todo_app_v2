@@ -1,0 +1,63 @@
+{%extends "base.html" %}
+
+{%block title%}
+    Home page
+{%endblock%}
+
+{%block content %}
+<nav>
+        <ul>
+            <li>
+                <a href="#">
+                    {{user}}
+                </a>
+            </li>
+            <li>
+                <form action="/admin/logout" method="POST">
+                    <input type="submit" value="logout" class="logout">
+                </form>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="flex-wrapper">
+            <h1>To-do List</h1>
+            {%for kanban in kanbans%}
+            {%if kanban.is_done == True %}
+            <div class="flex-item bg-done">
+                <h2 class="done">{{kanban.title}}</h2>
+                <div class="flex-action">
+                    <a href="/admin/show/{{kanban.kanban_id}}" class="badge-action edit">Edit</a>
+                    <form action="./delete/{{kanban.kanban_id}}">
+                        <input type="submit" class="badge-action delete" value="Delete">
+                    </form>
+                    <form action="/admin/done/{{kanban.kanban_id}}" method="POST">
+                        <input type="submit" value="Done" class="badge-action success">
+                    </form>
+                </div>
+                <p class="done">{{kanban.content}}</p>
+            </div>
+            {%else%}
+            <div class="flex-item">
+                <h2>{{kanban.title}}</h2>
+                <div class="flex-action">
+                    <a href="/admin/show/{{kanban.kanban_id}}" class="badge-action edit">Edit</a>
+                    <form action="./delete/{{kanban.kanban_id}}">
+                        <input type="submit" class="badge-action delete" value="Delete">
+                    </form>
+                    <form action="/admin/done/{{kanban.kanban_id}}" method="POST">
+                        <input type="submit" value="Done" class="badge-action success">
+                    </form>
+                </div>
+                <p>{{kanban.content}}</p>
+            </div>
+            {%endif%}
+            {%endfor%}
+        </div>
+    </div>
+
+    <a href="/admin/addnote" class="float">
+        <img src="{{ url_for('static', filename='assets/icon/add_icon.svg')}}" height="100%" width="100%" fill="white">
+    </a>
+{%endblock%}
